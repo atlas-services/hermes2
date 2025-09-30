@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu index{% endblock %}
+
+{% block body %}
+    <h1>Menu index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Slug</th>
+                <th>Active</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for menu in menus %}
+            <tr>
+                <td>{{ menu.name }}</td>
+                <td>{{ menu.position }}</td>
+                <td>{{ menu.slug }}</td>
+                <td>{{ menu.active ? 'Yes' : 'No' }}</td>
+                <td>
+                      <a class="py-1 px-2 btn btn-outline-success rounded-3" href="{{ path('app_menu_edit', {'id': menu.id}) }}">{{ ux_icon('fa:edit', {height: '16px', width: '22px', color:"#89c3a5"}) }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{{ path('app_menu_new') }}">Create new</a>
+{% endblock %}
