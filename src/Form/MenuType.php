@@ -18,16 +18,23 @@ class MenuType extends AbstractType
                 'required' => false,
                 'data' => true,
                 'attr' => [
-                    'class' => 'form-check-input',
-                    ]
+                    'class' => 'form-check-input ',
+                ],
+                'label_attr' => $options['label_attr']
                 ])
-            ->add('name')
-            ->add('position')
+            ->add('name', null ,  [
+                'label_attr' => $options['label_attr']
+                ])
+            ->add('position', null,  [
+                'label_attr' => $options['label_attr']
+                ] )
             ->add('parent', EntityType::class, [
                     'required' => false,
                     'class' => Menu::class,
                     'choice_label' => 'name',
                     'placeholder' => '-- Menu parent --', // Option par défaut
+                    'autocomplete' => true,
+                    'label_attr' => $options['label_attr']
             ])
         ;
     }
@@ -36,6 +43,9 @@ class MenuType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Menu::class,
+            'label_attr' => [
+                'class' => 'text-warning-emphasis ',
+            ]
         ]);
     }
 }
