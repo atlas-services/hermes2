@@ -23,3 +23,4 @@
 /.phpunit.cache/
 ###< phpunit/phpunit ###
 data/data_dev.db
+data/data_test.db

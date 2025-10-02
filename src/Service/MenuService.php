@@ -4,7 +4,6 @@ namespace App\Service;
 
 use App\Repository\MenuRepository;
 
-
 class MenuService
 {
 
@@ -14,6 +13,9 @@ class MenuService
     }
 
     public function createMenu($menu){
+        $lastPosition = $this->menuRepository->getLastMenuPosition() ;
+        $newPosition = $lastPosition + 1;
+        $menu->setPosition($newPosition);
         $this->menuRepository->save($menu);
         if(is_null($menu->getParent())){
             $menu->setParent($menu);
@@ -23,9 +25,28 @@ class MenuService
 
     public function getMenus(): array
     {
-            $menus = $this->menuRepository->getMenus();
-            return $menus;
+        $menus = $this->menuRepository->getMenus();
+        return $menus;
     }
+
+    public function getAllSubMenus(): array
+    {
+        $subMenus = [];
+        $menus = $this->menuRepository->getMenus();
+
+        foreach($menus as $menu){
+            $subMenus[$menu->getName()] = $this->getSubMenus($menu);
+        }
+
+        return $subMenus;
+    }
+
+    public function getSubMenus($menu): array
+    {
+        $subMenus = $this->menuRepository->getSubMenus($menu);
+        return $subMenus;
+    }
+
 
 
 }

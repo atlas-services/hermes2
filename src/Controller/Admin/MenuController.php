@@ -1,26 +1,29 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Menu;
 use App\Form\MenuType;
 use App\Service\MenuService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/menu')]
-final class MenuController extends AbstractController
+final class MenuController extends BaseController
 {
+
     #[Route(name: 'app_menu_index', methods: ['GET'])]
     public function index(MenuService $menuService): Response
     {
 
         $menus = $menuService->getMenus();
+        $subMenus = $menuService->getAllSubMenus();
+
         return $this->render('menu/index.html.twig', [
             'menus' => $menus,
+            'submenus' => $subMenus,
         ]);
     }
 
@@ -33,9 +36,6 @@ final class MenuController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $menuService->createMenu($menu);
-            // $entityManager->persist($menu);
-            // dd($menu);
-            // $entityManager->flush();
 
             return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -73,7 +73,7 @@ final class MenuController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_menu_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_menu_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(Request $request, Menu $menu, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$menu->getId(), $request->getPayload()->getString('_token'))) {
@@ -83,4 +83,5 @@ final class MenuController extends AbstractController
 
         return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

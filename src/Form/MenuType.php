@@ -25,9 +25,6 @@ class MenuType extends AbstractType
             ->add('name', null ,  [
                 'label_attr' => $options['label_attr']
                 ])
-            ->add('position', null,  [
-                'label_attr' => $options['label_attr']
-                ] )
             ->add('parent', EntityType::class, [
                     'required' => false,
                     'class' => Menu::class,

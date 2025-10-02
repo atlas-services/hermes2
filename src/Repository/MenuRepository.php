@@ -28,12 +28,61 @@ class MenuRepository extends ServiceEntityRepository
     public function getMenus(): array
     {
         $qb =  $this->createQueryBuilder('m')
-            ->select('m.id, m.name, m.position, m.slug, m.active')
             ->where('m.id = m.parent')
+            ->orderBy('m.position')
             ->getQuery();
 
             return $qb->getResult()
         ;
     }
+
+    /**
+     * @return position  Returns an integer 
+     */
+    public function getLastMenuPosition(): int
+    {
+        $qb =  $this->createQueryBuilder('m')
+            ->select('Max(m.position)')
+            ->where('m.id = m.parent')
+            ->getQuery();
+
+        $position = array_values($qb->getOneOrNullResult())[0] ;
+        return (int)$position;
+    }
+
+
+    /**
+     * @return Menu[] Returns an array of Menu objects
+     */
+    public function getSubMenus($menu): array
+    {
+        $qb =  $this->createQueryBuilder('m')
+            ->where('m.parent != m.id')
+            ->andWhere('m.parent = :menu')
+            ->setParameter('menu', $menu)
+            ->orderBy('m.position')
+            ->getQuery();
+
+            return $qb->getResult()
+        ;
+    }
+
+    /**
+     * @return position  Returns an integer 
+     */
+    public function getLastSubMenuPosition($menu): int
+    {
+        $qb =  $this->createQueryBuilder('m')
+            ->select('Max(m.position)')
+            ->where('m.parent = :menu')
+            ->setParameter('menu', $menu)
+            ->getQuery();
+
+        $position = array_values($qb->getOneOrNullResult())[0] ;
+        return (int)$position;
+    }
+
+
+
 
 }
