@@ -1,0 +1,18 @@
+form:
+  label:
+    back_to_list: Back to list
+    no_record: No record
+    active: Active/Inactive
+    position: Position
+    actions: Actions
+    create: Create
+    update: Update
+    delete: Delete
+    save: Save
+    name: Name
+    menus: Menus
+    menu: Menu
+    sub_menus: Sub Menus
+    sub_menu: Sub Menu
+    parent: Parent
+    parent_menu: -- parent Menu --

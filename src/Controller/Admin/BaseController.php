@@ -17,7 +17,7 @@ class BaseController extends AbstractController
     public function updatePositions(Request $request, EntityManagerInterface $entityManager)
     {
         $data = json_decode($request->getContent(), true);
- 
+
         $entityClass = match($data['type']) {
             'menu' => Menu::class,
         };
@@ -28,6 +28,28 @@ class BaseController extends AbstractController
                 $item->setPosition($positionData['position']);
                 $entityManager->persist($item);
             }
+        }
+
+        $entityManager->flush();
+
+        return new JsonResponse(['status' => 'success']);
+    }
+
+
+
+    #[Route('/switch-active', name: 'app_switch_active', methods: ['POST'])]
+    public function updatswitchActive(Request $request, EntityManagerInterface $entityManager)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $entityClass = match($data['type']) {
+            'menu' => Menu::class,
+        };
+
+        $item = $entityManager->getRepository($entityClass)->find($data['id']);
+        if ($item) {
+            $item->setActive(!$item->isActive());
+            $entityManager->persist($item);
         }
 
         $entityManager->flush();

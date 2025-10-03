@@ -26,12 +26,13 @@ export default class extends Controller {
     async updatePositions() {
         const positions = [];
         const type = document.getElementsByTagName("tbody")[0].dataset.type; // Assurez-vous que chaque item a un data-item-id
+        const locale = document.getElementsByTagName("tbody")[0].dataset.locale;
         this.itemTargets.forEach((item, index) => {
             const id = item.dataset.itemId; // Assurez-vous que chaque item a un data-item-id
             positions.push({ id: id, position: index + 1 });
         });
 
-        await fetch('/'+ type + '/update-positions', {
+        await fetch('/' + locale + '/admin/' + type + '/update-positions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

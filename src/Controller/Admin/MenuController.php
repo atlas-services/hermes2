@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/menu')]
+#[Route('/{_locale}/admin/menu', defaults: ['_locale' => 'fr'], requirements: ['_locale' => 'fr|en'],)]
 final class MenuController extends BaseController
 {
 
@@ -21,7 +21,7 @@ final class MenuController extends BaseController
         $menus = $menuService->getMenus();
         $subMenus = $menuService->getAllSubMenus();
 
-        return $this->render('menu/index.html.twig', [
+        return $this->render('admin/menu/index.html.twig', [
             'menus' => $menus,
             'submenus' => $subMenus,
         ]);
@@ -36,11 +36,11 @@ final class MenuController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $menuService->createMenu($menu);
-
+             $this->addFlash('info', sprintf('Menu "%s" created!', $menu->getName()));
             return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('menu/new.html.twig', [
+        return $this->render('admin/menu/new.html.twig', [
             'menu' => $menu,
             'form' => $form,
         ]);
@@ -49,7 +49,7 @@ final class MenuController extends BaseController
     #[Route('/{id}', name: 'app_menu_show', methods: ['GET'])]
     public function show(Menu $menu): Response
     {
-        return $this->render('menu/show.html.twig', [
+        return $this->render('admin/menu/show.html.twig', [
             'menu' => $menu,
         ]);
     }
@@ -63,11 +63,11 @@ final class MenuController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+             $this->addFlash('info', sprintf('Menu "%s" updated!', $menu->getName()));
             return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('menu/edit.html.twig', [
+        return $this->render('admin/menu/edit.html.twig', [
             'menu' => $menu,
             'form' => $form,
         ]);
@@ -79,6 +79,7 @@ final class MenuController extends BaseController
         if ($this->isCsrfTokenValid('delete'.$menu->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($menu);
             $entityManager->flush();
+            $this->addFlash('info', sprintf('Menu "%s" deleted!', $menu->getName()));
         }
 
         return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);

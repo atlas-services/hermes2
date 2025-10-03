@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu index{% endblock %}
+
+{% block body %}
+    {{ component('Alert') }}
+    <div class="mx-5 px-5 col-sm-8">
+        <h1>Menus</h1>
+        <a class="btn btn-success" href="{{ path('app_menu_new') }}">{{ 'form.label.create'|trans() }}</a>
+        {{ component('Menu', {menus: menus}) }}
+
+        <h1>{{ 'form.label.sub_menus'|trans() }}</h1>
+
+        {% for menu, submenu in submenus %}
+            <h4> {{ menu }} </h4>    
+            {{ component('Menu', {menus: submenu}) }}
+            <hr/>
+        {% else %}
+        {% endfor %}
+
+        <a class="btn btn-success" href="{{ path('app_menu_new') }}">{{ 'form.label.create'|trans() }}</a>
+    </div>
+{% endblock %}

@@ -63,8 +63,8 @@ class MenuRepository extends ServiceEntityRepository
             ->orderBy('m.position')
             ->getQuery();
 
-            return $qb->getResult()
-        ;
+            $result = $qb->getResult();
+            return $result;
     }
 
     /**

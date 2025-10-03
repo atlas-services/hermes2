@@ -16,20 +16,22 @@ class MenuType extends AbstractType
         $builder
             ->add('active', CheckboxType::class, [
                 'required' => false,
-                'data' => true,
+                'label' => 'form.label.active',
                 'attr' => [
                     'class' => 'form-check-input ',
                 ],
                 'label_attr' => $options['label_attr']
                 ])
             ->add('name', null ,  [
+                'label' => 'form.label.name',
                 'label_attr' => $options['label_attr']
                 ])
             ->add('parent', EntityType::class, [
                     'required' => false,
+                    'label' => 'form.label.parent',
                     'class' => Menu::class,
                     'choice_label' => 'name',
-                    'placeholder' => '-- Menu parent --', // Option par défaut
+                    'placeholder' => 'form.label.parent_menu', // Option par défaut
                     'autocomplete' => true,
                     'label_attr' => $options['label_attr']
             ])
