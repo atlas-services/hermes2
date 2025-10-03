@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class MenuController extends BaseController
 {
 
-    #[Route(name: 'app_menu_index', methods: ['GET'])]
+    #[Route(name: 'menu_index', methods: ['GET'])]
     public function index(MenuService $menuService): Response
     {
 
@@ -27,7 +27,7 @@ final class MenuController extends BaseController
         ]);
     }
 
-    #[Route('/new', name: 'app_menu_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'menu_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MenuService $menuService): Response
     {
         $menu = new Menu();
@@ -37,7 +37,7 @@ final class MenuController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $menuService->createMenu($menu);
              $this->addFlash('info', sprintf('Menu "%s" created!', $menu->getName()));
-            return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('menu_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/menu/new.html.twig', [
@@ -46,7 +46,7 @@ final class MenuController extends BaseController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_menu_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'menu_show', methods: ['GET'])]
     public function show(Menu $menu): Response
     {
         return $this->render('admin/menu/show.html.twig', [
@@ -54,7 +54,7 @@ final class MenuController extends BaseController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_menu_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'menu_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Menu $menu, EntityManagerInterface $entityManager): Response
     {
         // $form = $this->createForm(MenuType::class, $menu);
@@ -64,7 +64,7 @@ final class MenuController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
              $this->addFlash('info', sprintf('Menu "%s" updated!', $menu->getName()));
-            return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('menu_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/menu/edit.html.twig', [
@@ -73,7 +73,7 @@ final class MenuController extends BaseController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_menu_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[Route('/{id}', name: 'menu_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(Request $request, Menu $menu, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$menu->getId(), $request->getPayload()->getString('_token'))) {
@@ -82,7 +82,7 @@ final class MenuController extends BaseController
             $this->addFlash('info', sprintf('Menu "%s" deleted!', $menu->getName()));
         }
 
-        return $this->redirectToRoute('app_menu_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('menu_index', [], Response::HTTP_SEE_OTHER);
     }
 
 }

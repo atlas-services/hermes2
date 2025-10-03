@@ -20,7 +20,7 @@
                 <button class="btn btn-outline-success" data-action="click->move-item#moveDown">↓</button>
             </td>
             <td>
-                    <a class="py-1 px-2 btn btn-outline-success rounded-3" href="{{ path('app_menu_edit', {'id': menu.id}) }}">{{ ux_icon('fa:edit', {height: '16px', width: '22px', color:"#89c3a5"}) }}</a>
+                    <a class="py-1 px-2 btn btn-outline-success rounded-3" href="{{ path('menu_edit', {'id': menu.id}) }}">{{ ux_icon('fa:edit', {height: '16px', width: '22px', color:"#89c3a5"}) }}</a>
             </td>
         </tr>
     {% else %}

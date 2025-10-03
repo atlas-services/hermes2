@@ -21,6 +21,7 @@
         "symfony/form": "7.3.*",
         "symfony/framework-bundle": "7.3.*",
         "symfony/http-client": "7.3.*",
+        "symfony/mailer": "7.3.*",
         "symfony/maker-bundle": "^1.64",
         "symfony/monolog-bundle": "^3.0",
         "symfony/runtime": "7.3.*",
@@ -33,6 +34,7 @@
         "symfony/ux-twig-component": "^2.30",
         "symfony/validator": "7.3.*",
         "symfony/yaml": "7.3.*",
+        "symfonycasts/verify-email-bundle": "^1.17",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/inky-extra": "^3.21",
         "twig/intl-extra": "^3.21",
@@ -74,7 +76,8 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "elfinder:install": "symfony-cmd",
-            "importmap:install": "symfony-cmd"
+            "importmap:install": "symfony-cmd",
+            "app:create-user": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
