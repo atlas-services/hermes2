@@ -40,18 +40,31 @@ class CreateUserCommand extends Command
             throw new InvalidArgumentException('Email and password must be provided.');
         }
 
-        // Créer une instance de l'utilisateur
-        $user = new User();
-        $user->setEmail($email);
-        $user->setRoles(['ROLE_ADMIN']);
-        $user->setPassword(password_hash($password, PASSWORD_BCRYPT)); // Assurez-vous d'utiliser votre méthode de hashage
+        $message = $this->initAdminUser($email, $password);
 
-        // Enregistrer l'utilisateur dans la base de données
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
-        $output->writeln('User created successfully!');
+        $output->writeln( sprintf("%s with email %s ", $message, $email));
 
         return Command::SUCCESS;
+    }
+
+    public function initAdminUser($email, $password) : string
+    {
+        $message = 'user Admin exists.';
+        $admin = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+        if(is_null($admin)){
+            // Créer une instance de l'utilisateur
+            $user = new User();
+            $user->setEmail($email);
+            $user->setRoles(['ROLE_ADMIN']);
+            $user->setPassword(password_hash($password, PASSWORD_BCRYPT)); // Assurez-vous d'utiliser votre méthode de hashage
+
+            // Enregistrer l'utilisateur dans la base de données
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+            $message = 'Admin user created';
+        }
+
+        $this->entityManager->flush();
+        return $message ;
     }
 }
