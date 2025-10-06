@@ -21,6 +21,41 @@ class SectionRepository extends ServiceEntityRepository
         parent::__construct($registry, Section::class);
     }
 
+    public function save(Section $entity )
+    {
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @return position  Returns an integer 
+     */
+    public function getLastSectionPosition(): int
+    {
+        $qb =  $this->createQueryBuilder('m')
+            ->select('Max(m.position)')
+            ->getQuery();
+
+        $position = array_values($qb->getOneOrNullResult())[0] ;
+        return (int)$position;
+    }
+
+    /**
+     * @return Section[] Returns an array of Menu objects
+     */
+    public function getSections(): array
+    {
+        $qb =  $this->createQueryBuilder('m')
+            ->orderBy('m.position')
+            ->getQuery();
+
+            return $qb->getResult()
+        ;
+    }
+
+
+
+
     public function getArrayResults(){
         $results = $this->createQueryBuilder('s')
         ->orderBy('s.menu', 'ASC')

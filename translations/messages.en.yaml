@@ -16,6 +16,8 @@ form:
     sub_menu: Sub Menu
     parent: Parent
     parent_menu: -- parent Menu --
+    section_template: Presentation Type
+    template_width: Template width (from 1 to 12)
 
 global:
   login: Login
@@ -24,6 +26,8 @@ global:
   dashboard: My Dashboard
   menus_and_posts: Menus and Pages
   list_menus: Menu List
+  list_sections: Section List
+  list_pages: Pages List
   uploads_and_locales: Uploads and locales
   upload_hermes_dir: Uploads Pictures
 
@@ -32,11 +36,11 @@ global:
   about: A propos
   hello: Hello
   admin: Admin
-  breadcrumb: 'Vous êtes ici : '
+  breadcrumb: 'You are here : '
   new_content: New Content
   new_menu: New menu
-  active: Actif
-  inactive: Inactif
+  active: Active
+  inactive: Inactive
 
 
 info:

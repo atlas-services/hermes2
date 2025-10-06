@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Menu;
+use App\Entity\Section;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,6 +21,7 @@ class BaseController extends AbstractController
 
         $entityClass = match($data['type']) {
             'menu' => Menu::class,
+            'section' => Section::class,
         };
 
         foreach ($data['positions'] as $positionData) {
@@ -44,6 +46,7 @@ class BaseController extends AbstractController
 
         $entityClass = match($data['type']) {
             'menu' => Menu::class,
+            'section' => Section::class,
         };
 
         $item = $entityManager->getRepository($entityClass)->find($data['id']);

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Section index{% endblock %}
+
+{% block content %}
+    {{ component('Alert') }}
+    <div class="mx-5 px-5 col-sm-8">
+        <h1>sections</h1>
+        <a class="btn btn-success" href="{{ path('section_new') }}">{{ 'form.label.create'|trans() }}</a>
+        {{ component('Section', {sections: sections}) }}
+
+
+        <a class="btn btn-success" href="{{ path('section_new') }}">{{ 'form.label.create'|trans() }}</a>
+    </div>
+{% endblock %}

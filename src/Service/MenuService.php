@@ -47,6 +47,18 @@ class MenuService
         return $subMenus;
     }
 
-
+    /**
+     * @return Menu[] Returns an array of Menu objects that are their own Menu
+     */
+    public function getMenusPage(): array
+    {
+            $result = $this->menuRepository->findAll();
+            foreach($result as $menu){
+                if(0 == count($menu->getChildren())){
+                    $menuPage[] = $menu;
+                }
+            }
+            return $menuPage;
+    }
 
 }

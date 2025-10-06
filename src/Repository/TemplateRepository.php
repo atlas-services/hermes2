@@ -52,6 +52,15 @@ class TemplateRepository extends ServiceEntityRepository
         return $qb;
     }
 
+
+    public function getIntiTemplates($active_form = true)
+    {
+        return $this->getQbInitTemplates($active_form)
+                    ->getQuery()
+                    ->getResult();
+    }
+
+
     public function getTemplates()
     {
         $result = $this->getQbTemplates()
