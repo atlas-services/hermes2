@@ -9,6 +9,6 @@ class Alert
 {
     public string $message;
     public string $type = 'success';
+    public string $class;
 
-    
 }

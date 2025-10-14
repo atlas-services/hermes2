@@ -3,20 +3,23 @@
 {% block title %}Menu index{% endblock %}
 
 {% block content %}
-    {{ component('Alert') }}
+    {{ component('Alert', {class: 'mt-5'}) }}
     <div class="mx-5 px-5 col-sm-8">
         <h1>Menus</h1>
         <a class="btn btn-success" href="{{ path('menu_new') }}">{{ 'form.label.create'|trans() }}</a>
         {{ component('Menu', {menus: menus}) }}
 
-        <h1>{{ 'form.label.sub_menus'|trans() }}</h1>
 
-        {% for menu, submenu in submenus %}
-            <h4> {{ menu }} </h4>    
-            {{ component('Menu', {menus: submenu}) }}
-            <hr/>
-        {% else %}
-        {% endfor %}
+
+        {% if submenus|length > 0 %}
+            <h1>{{ 'form.label.sub_menus'|trans() }}</h1>
+            {% for menu, submenu in submenus %}
+                <h4> {{ menu }} </h4>    
+                {{ component('Menu', {menus: submenu}) }}
+                <hr/>
+            {% else %}
+            {% endfor %}
+        {% endif %}
 
         <a class="btn btn-success" href="{{ path('menu_new') }}">{{ 'form.label.create'|trans() }}</a>
     </div>

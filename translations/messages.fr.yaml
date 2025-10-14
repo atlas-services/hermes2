@@ -16,7 +16,7 @@ form:
     sub_menu: Sous Menu
     parent: Parent
     parent_menu: -- Menu Parent --
-    section_template: Type de présentation
+    post_template: Type de présentation
     template_width: Largeur du template (de 1 to 12)
 
 
@@ -27,7 +27,7 @@ global:
   dashboard: Mon Tableau de bord
   menus_and_posts: Menus et Pages
   list_menus: Liste des Menus
-  list_sections: Liste des Sections
+  list_posts: Liste des Posts
   list_pages: Liste des pages
   uploads_and_locales: Uploads et locales
   upload_hermes_dir: Uploads d'images

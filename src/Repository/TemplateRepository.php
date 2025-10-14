@@ -53,13 +53,12 @@ class TemplateRepository extends ServiceEntityRepository
     }
 
 
-    public function getIntiTemplates($active_form = true)
+    public function getInitTemplates($active_form = true)
     {
         return $this->getQbInitTemplates($active_form)
                     ->getQuery()
                     ->getResult();
     }
-
 
     public function getTemplates()
     {

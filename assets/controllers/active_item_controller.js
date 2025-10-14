@@ -14,7 +14,7 @@ export default class extends Controller {
         const id = item.dataset.itemId; // Assurez-vous que chaque item a un data-item-id
 
 
-        await fetch('/' + locale + '/admin/' + type + '/switch-active', {
+        await fetch('/' + locale + '/admin' +  '/switch-active', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

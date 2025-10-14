@@ -3,7 +3,7 @@
 {% block title %}Admin{% endblock %}
 
 {% block content %}
-    {{ component('Alert') }}
+    {{ component('Alert', {class: 'mt-5'}) }}
     <div class="mx-5 px-5 col-sm-8">
     <section class="mt-4 mt-md-1">
         {% include 'admin/admin_presentation.html.twig' %}

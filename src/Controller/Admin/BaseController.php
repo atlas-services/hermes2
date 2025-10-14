@@ -3,14 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Menu;
-use App\Entity\Section;
+use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
-
+#[Route('/{_locale}/admin', defaults: ['_locale' => 'fr'], requirements: ['_locale' => 'fr|en'],)]
 class BaseController extends AbstractController
 {
 
@@ -21,7 +21,7 @@ class BaseController extends AbstractController
 
         $entityClass = match($data['type']) {
             'menu' => Menu::class,
-            'section' => Section::class,
+            'post' => Post::class,
         };
 
         foreach ($data['positions'] as $positionData) {
@@ -37,8 +37,6 @@ class BaseController extends AbstractController
         return new JsonResponse(['status' => 'success']);
     }
 
-
-
     #[Route('/switch-active', name: 'app_switch_active', methods: ['POST'])]
     public function updatswitchActive(Request $request, EntityManagerInterface $entityManager)
     {
@@ -46,7 +44,7 @@ class BaseController extends AbstractController
 
         $entityClass = match($data['type']) {
             'menu' => Menu::class,
-            'section' => Section::class,
+            'post' => Post::class,
         };
 
         $item = $entityManager->getRepository($entityClass)->find($data['id']);

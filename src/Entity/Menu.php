@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Section;
+use App\Entity\Post;
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\PositionTrait;
@@ -35,16 +35,16 @@ class Menu
     private Collection $children;
 
     /**
-     * @var Section[]|ArrayCollection
+     * @var Post[]|ArrayCollection
      */
-    #[ORM\OneToMany(targetEntity: Section::class, mappedBy: 'menu', cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'menu', cascade: ['persist', 'remove'])]
     #[ORM\OrderBy(['position' => 'ASC'])]
-    protected $sections;
+    protected $posts;
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
-        $this->sections = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function __toString()
@@ -104,32 +104,32 @@ class Menu
         return $this;
     }
 
-    public function addSection(?Section ...$sections): void
+    public function addPost(?Post ...$posts): void
     {
-        foreach ($sections as $section) {
-            if (!$this->sections->contains($section)) {
-                if($section->isActive()){
-                    $this->sections->add($section);
-                    $section->setMenu($this);
+        foreach ($posts as $post) {
+            if (!$this->posts->contains($post)) {
+                if($post->isActive()){
+                    $this->posts->add($post);
+                    $post->setMenu($this);
                 }
             }
         }
     }
 
-    public function removeSection(Section $section): void
+    public function removePost(Post $post): void
     {
-        $this->sections->removeElement($section);
-        $section->setMenu(null);
+        $this->posts->removeElement($post);
+        $post->setMenu(null);
     }
 
-    public function getSections(): ?Collection
+    public function getPosts(): ?Collection
     {
-        foreach ($this->sections as $section){
-            if(!$section->isActive()){
-                $this->removeSection($section);
+        foreach ($this->posts as $post){
+            if(!$post->isActive()){
+                $this->removePost($post);
             }
         }
-        return $this->sections;
+        return $this->posts;
     }
 
     /**

@@ -6,12 +6,13 @@ use App\Entity\Menu;
 use App\Form\MenuType;
 use App\Service\MenuService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/{_locale}/admin/menu', defaults: ['_locale' => 'fr'], requirements: ['_locale' => 'fr|en'],)]
-final class MenuController extends BaseController
+final class MenuController extends AbstractController
 {
 
     #[Route(name: 'menu_index', methods: ['GET'])]
@@ -46,7 +47,7 @@ final class MenuController extends BaseController
         ]);
     }
 
-    #[Route('/{id}', name: 'menu_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'menu_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(Menu $menu): Response
     {
         return $this->render('admin/menu/show.html.twig', [

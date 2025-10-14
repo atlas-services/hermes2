@@ -32,7 +32,7 @@ export default class extends Controller {
             positions.push({ id: id, position: index + 1 });
         });
 
-        await fetch('/' + locale + '/admin/' + type + '/update-positions', {
+        await fetch('/' + locale + '/admin' + '/update-positions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

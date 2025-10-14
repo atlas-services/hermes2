@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Section;
+use App\Entity\Menu;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
@@ -20,18 +20,24 @@ class PostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Post::class);
     }
+    
+    public function save(Post $entity )
+    {
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+    }
 
     /**
      * @return int Returns max position value
      */
 
-    public function getMaxPosition(Section $section = null)
+    public function getMaxPosition(Menu $menu = null)
     {
         $qb = $this->getQbMaxPosition();
-        if(isset($section)) {
+        if(isset($menu)) {
             $qb
-            ->where('m.section = :section')
-            ->setParameter(':section', $section->getId());
+            ->where('m.menu = :menu')
+            ->setParameter(':menu', $menu->getId());
         }
         $list = $qb
             ->getQuery()
@@ -44,6 +50,19 @@ class PostRepository extends ServiceEntityRepository
             return ++$list['position'];
         }
         return 1;
+    }
+
+        /**
+     * @return position  Returns an integer 
+     */
+    public function getLastPostPosition(): int
+    {
+        $qb =  $this->createQueryBuilder('m')
+            ->select('Max(m.position)')
+            ->getQuery();
+
+        $position = array_values($qb->getOneOrNullResult())[0] ;
+        return (int)$position;
     }
 
     /**
@@ -74,14 +93,14 @@ class PostRepository extends ServiceEntityRepository
      public function getEditablePosts()
      {
         $allposts = $this->createQueryBuilder('s')
-        ->orderBy('s.section', 'ASC')
+        ->orderBy('s.menu', 'ASC')
         ->addOrderBy('s.position', 'ASC')
         ->addOrderBy('s.active', 'DESC')
         ->getQuery()
         ->getResult();
         // $allposts = $this->findAll();
         foreach($allposts as $key => $post){
-            if(!is_null($post->getSection())){
+            if(!is_null($post->getMenu())){
                 // $posts[] = $post;
                 $posts[$key]['id'] = $post->getId();
                 $posts[$key]['active'] = $post->isActive();
@@ -91,15 +110,15 @@ class PostRepository extends ServiceEntityRepository
                 $posts[$key]['endPublishedAt'] = $post->getEndPublishedAt();
                 $posts[$key]['updatedAt'] = $post->getUpdatedAt();
 
-                $posts[$key]['section'] = $post->getSection()->getName();
-                $posts[$key]['section_id'] = $post->getSection()->getId();
-                $posts[$key]['menu'] = $post->getSection()->getMenu()->getName();
-                $posts[$key]['template'] = $post->getSection()->getTemplate()->getName();
-                $posts[$key]['template_code'] = $post->getSection()->getTemplate()->getCode();
-                $posts[$key]['menu_id'] = $post->getSection()->getMenu()->getId();
-                $posts[$key]['menu_slug'] = $post->getSection()->getMenu()->getSlug();
-                $posts[$key]['locale'] = $post->getSection()->getMenu()->getLocale();
-                $posts[$key]['sheet'] = $post->getSection()->getMenu()->getSheet()->getName();
+                $posts[$key]['menu'] = $post->getMenu()->getName();
+                $posts[$key]['menu_id'] = $post->getMenu()->getId();
+                $posts[$key]['menu'] = $post->getMenu()->getMenu()->getName();
+                $posts[$key]['template'] = $post->getMenu()->getTemplate()->getName();
+                $posts[$key]['template_code'] = $post->getMenu()->getTemplate()->getCode();
+                $posts[$key]['menu_id'] = $post->getMenu()->getMenu()->getId();
+                $posts[$key]['menu_slug'] = $post->getMenu()->getMenu()->getSlug();
+                $posts[$key]['locale'] = $post->getMenu()->getMenu()->getLocale();
+                $posts[$key]['sheet'] = $post->getMenu()->getMenu()->getSheet()->getName();
 
             }
         }
@@ -107,5 +126,19 @@ class PostRepository extends ServiceEntityRepository
          return array_values($posts);
 
      }
+
+         /**
+     * @return Post[] Returns an array of Menu objects
+     */
+    public function getPosts(): array
+    {
+        $qb =  $this->createQueryBuilder('m')
+            ->orderBy('m.position')
+            ->getQuery();
+
+            return $qb->getResult()
+        ;
+    }
+
 
 }

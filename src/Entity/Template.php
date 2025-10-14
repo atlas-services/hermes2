@@ -36,18 +36,18 @@ class Template
     use SummaryTrait;
 
     /**
-     * @var Section[]|ArrayCollection
+     * @var Post[]|ArrayCollection
      */
-    #[ORM\JoinTable(name: 'section_template')]
-    #[ORM\OneToMany(targetEntity: Section::class, mappedBy: 'template', cascade: ['persist', 'remove'])]
-    private $sections;
+    #[ORM\JoinTable(name: 'post_template')]
+    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'template', cascade: ['persist', 'remove'])]
+    private $posts;
 
     /**
      * Template constructor.
      */
     public function __construct()
     {
-        $this->sections = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -68,31 +68,31 @@ class Template
         return isset($this->$prop);
     }
 
-    public function addSection(?Section ...$sections): void
+    public function addPost(?Post ...$posts): void
     {
-        foreach ($sections as $section) {
-            if (!$this->sections->contains($section)) {
-                if($section->isActive()){
-                    $this->sections->add($section);
+        foreach ($posts as $post) {
+            if (!$this->posts->contains($post)) {
+                if($post->isActive()){
+                    $this->posts->add($post);
                 }
             }
         }
     }
 
-    public function removeSection(Section $section): void
+    public function removePost(Post $post): void
     {
-        $this->sections->removeElement($section);
-        $section->setSection(null);
+        $this->posts->removeElement($post);
+        $post->setPost(null);
     }
 
-    public function getSections(): ?Collection
+    public function getPosts(): ?Collection
     {
-        foreach ($this->sections as $section){
-            if(!$section->isActive()){
-                $this->removeSection($section);
+        foreach ($this->posts as $post){
+            if(!$post->isActive()){
+                $this->removePost($post);
             }
         }
-        return $this->sections;
+        return $this->posts;
     }
 
 }

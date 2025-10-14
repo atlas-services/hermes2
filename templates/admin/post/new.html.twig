@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'form.label.new_post'|trans() }}{% endblock %}
+
+{% block content %}
+
+    <h1>{{ 'form.label.create'|trans() }}</h1>
+    <a class="btn btn-info my-3" href="{{ path('post_index') }}">{{ 'form.label.back_to_list'|trans() }}</a>
+    
+    {{ include('admin/post/_form.html.twig') }}
+
+    <a class="btn btn-info my-3" href="{{ path('post_index') }}">{{ 'form.label.back_to_list'|trans() }}</a>
+
+
+{% endblock %}

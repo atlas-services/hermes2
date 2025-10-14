@@ -16,7 +16,7 @@ form:
     sub_menu: Sub Menu
     parent: Parent
     parent_menu: -- parent Menu --
-    section_template: Presentation Type
+    post_template: Presentation Type
     template_width: Template width (from 1 to 12)
 
 global:
@@ -26,7 +26,7 @@ global:
   dashboard: My Dashboard
   menus_and_posts: Menus and Pages
   list_menus: Menu List
-  list_sections: Section List
+  list_posts: Post List
   list_pages: Pages List
   uploads_and_locales: Uploads and locales
   upload_hermes_dir: Uploads Pictures
