@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\Config;
 use App\Entity\Template;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -10,9 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class InitHermesTemplatesCommand extends Command
+class InitHermesTemplatesAndConfigCommand extends Command
 {
-    protected static $defaultName = 'app:init-hermes-templates';
+    protected static $defaultName = 'app:init-hermes-templates-configs';
 
     public function __construct(private EntityManagerInterface $entityManager, private ParameterBagInterface $params,)
     {
@@ -23,15 +24,17 @@ class InitHermesTemplatesCommand extends Command
     {
         $this
             ->setName(static::$defaultName)
-            ->setDescription('Initiate Hermes Templates.');
+            ->setDescription('Initiate Hermes Templates and Configs.');
       }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
 
         $nb = $this->initTemplates();
-
         $output->writeln(sprintf(" %s Templates created successfully ", $nb));
+
+        $nb = $this->initConfig();
+        $output->writeln(sprintf(" %s Configs created successfully ", $nb));
 
         return Command::SUCCESS;
     }
@@ -63,4 +66,42 @@ class InitHermesTemplatesCommand extends Command
         $this->entityManager->flush();
         return $nb;
     }
+
+    public function initConfig() : int
+    {
+        $nb = 0;
+        $configs = $this->params->get('configs');
+
+        if (!$configs) {
+            throw new InvalidArgumentException('No config configured.');
+        }
+
+        foreach($configs as $type => $config){
+
+            foreach($config as $code => $conf){
+                $db_config = $this->entityManager->getRepository(Config::class)->findOneBy(['type' => $type, 'code' => $code]);
+                if(is_null($db_config)){
+                    // Créer  config
+                    $newConfig = new Config();
+                    $newConfig->setActive(true);
+                    $newConfig->setType($type);
+                    $newConfig->setCode($code);
+                    $newConfig->setSummary($conf['summary']);
+                    $newConfig->setValue($conf['value']);
+                    if(!isset($conf['position'])){
+                        $conf['position'] = 99;
+                    }
+                    $newConfig->setPosition($conf['position']);
+
+                    $this->entityManager->persist($newConfig);
+                    $nb++;
+                }
+            }
+
+        }
+
+        $this->entityManager->flush();
+        return $nb;
+    }
+
 }
