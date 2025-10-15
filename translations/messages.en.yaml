@@ -19,6 +19,31 @@ form:
     post_template: Presentation Type
     template_width: Template width (from 1 to 12)
 
+config:
+  label: Configuration
+  type: Type
+  value: Valeur
+  list: Configuration
+  affiche_list_image: Configuration des images
+  affiche_list_admin: Configuration du Tableau de bord admin
+  affiche_list_head: Configuration balises title et meta
+  affiche_list: Configuration générale du site
+  affiche_list_contact: Configuration du contact
+  affiche_list_newsletter: Configuration de la newsletter
+  affiche_list_livredor: Configuration du livre d'or
+  affiche_list_menu: Configuration du menu
+  affiche_list_content: Configuration du contenu
+  affiche_list_folio: Configuration des folios
+  affiche_list_carousel: Configuration des carousels
+  affiche_list_modale: Configuration des modales
+  affiche_list_card: Configuration des cards
+  affiche_list_footer: Configuration du pied de page
+  affiche_list_network: Configuration des réseaux sociaux
+  affiche_list_formulaire: Configuration des formulaires
+  affiche_list_undefined: Configuration non définie
+  affiche_list_isotope: Configuration isotope
+
+
 global:
   login: Login
   logout: Logout
@@ -30,17 +55,84 @@ global:
   list_pages: Pages List
   uploads_and_locales: Uploads and locales
   upload_hermes_dir: Uploads Pictures
-
-  copyright: 2023 All Rights Reserved by
+  copyright: &copy;2025 Tous droits réservés par
   created_by: This site has been powered by the CMS<a href="http://hermes-cms.org" target="_blanks">HERMES</a>
   about: A propos
   hello: Hello
   admin: Admin
   breadcrumb: 'You are here : '
+  no_record: Pas d'enregistrement
+  list: List
   new_content: New Content
   new_menu: New menu
   active: Active
   inactive: Inactive
+  autres_options: Autres options
+  autres_options_liste: Autres options (Liste)
+
+  copyleft: 2021 Tous droits réservés par 
+  blocks: Mes blocks de contenus
+  speed_dashboard: Création rapide
+  newsletter_and_testimony: Newsletter et livre d''or
+  newsletter_users: Mail list Newsletter
+  active_newsletter: Newsletter active
+  new_page: Menu
+  new_post: Nouveau contenu dans le menu
+  menu_one_page: Menu One page
+  new_post_libre_hms: Template(s) Libre(s) Hermes
+  new_post_libre: Template Libre
+  new_post_liste: Template Liste
+  new_menu_post: Ajout d'un menu avec un contenu
+  add_menu_post: Ajouter un contenu
+  remove_menu_post: Supprimer ce contenu
+  menu_entete: Menus
+  actions: Actions
+  show: Voir
+  preview: <i class="hms-color1 btn btn-outline-success fa fa-eye" aria-hidden="true"></i>
+  edit: <i class="fa fa-edit"></i>
+  new: Créer
+  delete: <i class="fa fa-trash"></i>
+  back_to_list: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+  </svg> Retour à la liste'
+  confirm_delete_question: Êtes vous certain de vouloir supprimer
+  confirm_delete: Supprimer
+  unconfirm_delete: Annuler
+  delete_content: le contenu
+  delete_section: le(s) contenu(s) de
+  delete_menu: le sous-menu (et ses contenus)
+  delete_sheet: le menu
+  update: Sauvegarder
+  update_next: Sauvegarder et Continuer
+  update_libelle: Mettez à jour votre site (vos contenus, vos menus et sous menus)
+  config_site: Configurez votre site (email de contact, logo, image de fond, couleur en arrière plan...)
+  more: "Aller plus loin : Modifier l''agencement des menus, des pages, désactiver (ou activer) certaines pages..."
+  sheet: Menu
+  section: Section
+  post: Contenu
+  url: Url de la vidéo
+  menu: Sous Menu
+  template: Affichage
+  position: Position
+  locale: Langue
+  add_locale: Ajouter une langue
+  name_menu_reference: Menu Référence (commun à toutes les langues)
+  name_sous_menu_reference: Sous Menu Référence ( commun à toutes les langues )  
+  label: Label
+  code: Code
+  name: Nom
+  image: Image (Taille maximale < 2 Mo)
+  image_fond: Image de fond (Taille maximale < 2 Mo)
+  value: Valeur
+  summary: Description sommaire
+  content: Contenu
+  updatedAt: Mis à jour le
+  startPublishedAt: Date de début de publication
+  endPublishedAt: Date de fin de publication
+
+
+
+
 
 
 info:

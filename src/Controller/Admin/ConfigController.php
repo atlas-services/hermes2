@@ -112,7 +112,7 @@ class ConfigController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $doctrine->getManager('config')->flush();
+            $doctrine->getManager()->flush();
             try {
                 if(is_null($request->attributes->get('config'))){
                     $type = $config->getType();

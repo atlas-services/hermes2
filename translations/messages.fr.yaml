@@ -31,7 +31,6 @@ global:
   list_pages: Liste des pages
   uploads_and_locales: Uploads et locales
   upload_hermes_dir: Uploads d'images
-
   copyright: 2023 All Rights Reserved by
   created_by: Ce site a été conçu avec le CMS<a href="http://hermes-cms.org" target="_blanks">HERMES</a>
   about: À propos
@@ -42,7 +41,8 @@ global:
   new_menu: Nouveau Menu
   active: Actif
   inactive: Inactif
-
+  no_record: Pas d'enregistrement
+  list: Liste
 
 info:
   admin_type_site_1: 'Hermes a été conçu pour vous permettre de créer facilement vos pages Web.'
