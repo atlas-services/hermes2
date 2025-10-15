@@ -4,7 +4,7 @@ export default class extends Controller {
     static targets = ['item'];
 
     switch(event) {
-        const item = event.currentTarget.closest('.list-item');
+        const item = event.currentTarget.closest('.list-items');
         this.switchActive(item);
     }
 

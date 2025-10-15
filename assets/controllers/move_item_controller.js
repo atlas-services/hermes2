@@ -4,7 +4,7 @@ export default class extends Controller {
     static targets = ['item'];
 
     moveUp(event) {
-        const item = event.currentTarget.closest('.list-item');
+        const item = event.currentTarget.closest('.list-items');
         const previousItem = item.previousElementSibling;
 
         if (previousItem) {
@@ -14,7 +14,7 @@ export default class extends Controller {
     }
 
     moveDown(event) {
-        const item = event.currentTarget.closest('.list-item');
+        const item = event.currentTarget.closest('.list-items');
         const nextItem = item.nextElementSibling;
 
         if (nextItem) {
