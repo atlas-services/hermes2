@@ -14,6 +14,7 @@
         "helios-ag/fm-elfinder-bundle": "^12.7",
         "liip/imagine-bundle": "^2.14",
         "stof/doctrine-extensions-bundle": "^1.14",
+        "symfony/asset": "7.3.*",
         "symfony/asset-mapper": "7.3.*",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",

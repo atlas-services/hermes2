@@ -40,7 +40,7 @@
                         <img style="max-height: 100px;" src="{{ asset(vich_uploader_asset(config, 'imageFile')) }}" /></td>
                     {% endif %}
                     <td>
-                        <a class="hms-color1" href="{{ path('config_edit', {'id': config.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                        <a class="hms-color1 btn btn-success" href="{{ path('config_edit', {'id': config.id}) }}">{{'form.label.update'|trans()|raw }}</a>
                     </td>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <td>
