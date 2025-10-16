@@ -1,6 +1,7 @@
 {% extends 'front/base.html.twig' %}
 
 {% block content %}
-
-
+    {% for post in posts %}
+    <p>{{ post.content }}</p
+    {% endfor %}
 {% endblock content %}

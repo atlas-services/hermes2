@@ -15,7 +15,9 @@
         {% block body %}
             {% block nav %}
                 <section id="section_top" class="container"></section>
-                {% include 'front/navbar/' ~ nav_bar ~'.html.twig' %}
+                {% if nav_bar is defined %}
+                    {% include 'front/navbar/' ~ nav_bar ~'.html.twig' %}
+                {% endif %}
             {% endblock nav %}
 
             {% block content %}

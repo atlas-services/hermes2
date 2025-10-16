@@ -38,6 +38,7 @@ class ConfigRepository extends ServiceEntityRepository
     }
     public function getActiveConfig()
     {
+        $config_simple = [];
         $config = $this->createQueryBuilder('c')
         ->where('c.active = true')
         ->getQuery()

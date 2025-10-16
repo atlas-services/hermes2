@@ -26,6 +26,31 @@ class MenuService
     public function getMenus(): array
     {
         $menus = $this->menuRepository->getMenus();
+
+        return $menus;
+    }
+
+
+    public function getMenusAndPosts($submenu): array
+    {
+        $menus = $this->menuRepository->getMenus();
+        $posts = $submenu?->getPosts();
+        if(is_null($posts)){
+            $submenus = $menus[0]?->getChildren();
+            $posts = $submenus[1]?->getPosts();
+        }
+
+        return [
+            'menus' => $menus,
+            'posts' => $posts,
+        ];
+
+    }
+
+
+    public function getCurrentMenu($menus, $menu, $submenu): array
+    {
+        // dd($menu);
         return $menus;
     }
 

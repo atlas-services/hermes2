@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\PositionTrait;
+use App\Entity\Traits\SlugTrait;
 use App\Repository\MenuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -18,6 +19,7 @@ class Menu
 {
     use ActiveTrait;
     use NameTrait;
+    use SlugTrait;
     use PositionTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -28,8 +28,29 @@ class MenuRepository extends ServiceEntityRepository
     public function getMenus(): array
     {
         $qb =  $this->createQueryBuilder('m')
+            ->leftJoin('m.children', 'c')  // Jointure avec les enfants
+            ->addSelect('c')
             ->where('m.id = m.parent')
             ->orderBy('m.position')
+            ->addOrderBy('c.position', 'ASC')
+            ->getQuery();
+
+            return $qb->getResult()
+        ;
+    }
+
+        /**
+     * @return Menu[] Returns an array of Menu objects
+     */
+    public function getMenusWithSubMenus(): array
+    {
+        $qb =  $this->createQueryBuilder('m')
+            ->leftJoin('m.children', 'c')  // Jointure avec les enfants
+            ->addSelect('c')
+            ->where('m.id = m.parent')
+            ->andWhere('c.parent != c.id')
+            ->orderBy('m.position')
+            ->addOrderBy('c.position', 'ASC')
             ->getQuery();
 
             return $qb->getResult()

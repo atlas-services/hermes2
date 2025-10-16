@@ -16,12 +16,13 @@
                         <!-- Dropdown menu -->
                         <div id="dropdownNavbarSub{{menu.id}}" class="z-10 hidden font-normal divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
-                            {% for submenu in menu.ownchildren %}
+                                {% for submenu in menu.ownchildren|sort((a, b) => a.position <=> b.position) %}
                                 <!-- Dropdown menu -->
+                                {# {% set path = "%s/%s/%s"|format(app.request.locale, menu.slug, submenu.slug) %} #}
                                 <li aria-labelledby="dropdownNavbarLinkSub{{menu.id}}">
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ submenu.name }}</a>
+                                    <a href="{{ path('menu-submenu', {'_locale': app.request.locale, 'menu': menu.slug, 'submenu': submenu.slug  }) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ submenu.name }}</a>
                                 </li>
-                            {% endfor %}
+                                {% endfor %}
                             </ul>
                         </div>
                     {% endif %}
