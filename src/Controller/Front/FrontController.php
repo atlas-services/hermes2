@@ -8,21 +8,14 @@
 
 namespace App\Controller\Front;
 
-use App\Entity\Config;
-use App\Entity\Menu;
-use App\Entity\Post;
 use App\Service\ConfigService;
 use App\Service\MenuService;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 class FrontController extends AbstractController
 {
-
-
-
 
     #[Route(path: '/', name: 'home', methods: ['GET|POST'])]
     #[Route(path: '/{_locale?}', name: 'homepage', methods: ['GET|POST'])]
@@ -38,6 +31,8 @@ class FrontController extends AbstractController
         ];
 
         $array = array_merge($array, $configs);
+
+        // dd($array);
 
         return $this->render('front/index.html.twig', $array);
     }

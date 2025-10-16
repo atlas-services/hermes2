@@ -24,9 +24,9 @@
                 <tr class="align-middle">
                     <td>{{ config.active ? 'global.active'|trans()|raw : 'global.inactive'|trans()|raw }}</td>
                     <td>{{ config.type }}</td>
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <td>{{ config.code }}</td>
-                    {% endif %}
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <td>{{ config.code }}</td>
+                        {% endif %}
                     <td>{{ config.summary }}</td>
                     <td>
                         {% if 'color' in config.code  %}
@@ -37,10 +37,10 @@
                     <td>{{ config.position }}</td>
                     <td>
                         {% if vich_uploader_asset(config, 'imageFile') is not null %}
-                        <img style="max-height: 100px;" src="{{ asset(vich_uploader_asset(config, 'imageFile')) }}" /></td>
-                    {% endif %}
-                    <td>
-                        <a class="hms-color1 btn btn-success" href="{{ path('config_edit', {'id': config.id}) }}">{{'form.label.update'|trans()|raw }}</a>
+                            <img style="max-height: 100px;" src="{{ asset(vich_uploader_asset(config, 'imageFile')) }}" /></td>
+                        {% endif %}
+                    <td class="col-sm-2">
+                        <a class="btn btn-success" href="{{ path('config_edit', {'id': config.id}) }}">{{'form.label.update'|trans()|raw }}</a>
                     </td>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <td>
@@ -56,6 +56,6 @@
         </tbody>
     </table>
     {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <a  class="btn btn-outline-secondary hms-bg-color1 text-white" href="{{ path('config_new') }}">{{ 'global.new'|trans() }}</a>
+        <a  class="btn btn-outline-secondary text-white" href="{{ path('config_new') }}">{{ 'global.new'|trans() }}</a>
     {% endif %}
 {% endblock %}

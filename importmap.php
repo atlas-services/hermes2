@@ -57,4 +57,21 @@ return [
         'version' => '5.3.8',
         'type' => 'css',
     ],
+    'tailwindcss/index.min.css' => [
+        'version' => '4.1.14',
+        'type' => 'css',
+    ],
+    'tailwindcss' => [
+        'version' => '4.1.14',
+    ],
+    'flowbite' => [
+        'version' => '3.1.2',
+    ],
+    'flowbite-datepicker' => [
+        'version' => '1.3.2',
+    ],
+    'flowbite/dist/flowbite.min.css' => [
+        'version' => '3.1.2',
+        'type' => 'css',
+    ],
 ];

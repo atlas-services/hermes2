@@ -82,6 +82,19 @@ class Menu
         return $this->children;
     }
 
+    /**
+     * @return Collection<int, self>
+     */
+    public function getOwnChildren(): Collection
+    {
+        foreach($this->children as $child){
+            if($child == $this){
+                $this->children->removeElement($child);
+            }
+        }
+        return $this->children;
+    }
+
     public function addMenu(self $menu): static
     {
         if (!$this->children->contains($menu)) {

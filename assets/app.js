@@ -1,6 +1,7 @@
 import './bootstrap.js';
 
 import 'bootstrap';
+import 'flowbite';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -9,4 +10,5 @@ import 'bootstrap';
  */
 import './styles/app.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'flowbite/dist/flowbite.min.css';
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
