@@ -4,14 +4,13 @@ namespace App\Form;
 
 use App\Entity\Menu;
 use App\Entity\Post;
-
 use App\Entity\Template;
 use App\Form\AbstractNameBaseType;
+use App\Form\CKEditor5Type;
 use App\Repository\TemplateRepository;
 use App\Service\MenuService;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -60,7 +59,7 @@ class PostType extends AbstractNameBaseType
             ->add('name', null, [
                 'label' => 'form.label.name'
             ])
-            ->add('content', TextareaType::class, [
+            ->add('content', CKEditor5Type::class, [
                 'label' => 'form.label.content'
             ])
 
