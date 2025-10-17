@@ -22,5 +22,9 @@
 /phpunit.xml
 /.phpunit.cache/
 ###< phpunit/phpunit ###
-data/data_dev.db
-data/data_test.db
+
+!/data/.gitkeep
+/data
+/public/uploads/
+!/public/uploads/content/.gitkeep
+!/public/uploads/entity/.gitkeep

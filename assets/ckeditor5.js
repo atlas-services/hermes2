@@ -29,8 +29,10 @@ import {
     List,
     MediaEmbed,
     Paragraph,
-    SimpleUploadAdapter, 
+    SimpleUploadAdapter,
     SourceEditing,
+    Strikethrough,
+    Underline
 } from 'ckeditor5';
 // Si vous devez importer des traductions, ici les traductions en français
 import coreTranslations from 'ckeditor5/translations/fr.js';
@@ -38,7 +40,7 @@ import 'ckeditor5/dist/ckeditor5.min.css';
 
 export default class EnhancedEditor extends ClassicEditor {}
 
-EnhancedEditor.builtinPlugins = [    
+EnhancedEditor.builtinPlugins = [
     Alignment,
     Autoformat,
     BlockQuote,
@@ -67,19 +69,26 @@ EnhancedEditor.builtinPlugins = [
     List,
     MediaEmbed,
     Paragraph,
-    SimpleUploadAdapter, 
-    SourceEditing];
+    SimpleUploadAdapter,
+    SourceEditing,
+    Strikethrough,
+    Underline
+    ];
 
 EnhancedEditor.defaultConfig = {
     licenseKey: 'GPL',
     toolbar: [
         'sourceEditing',
+        "list",
+        "paragraph",
         'fontSize',
         'fontFamily',
         'fontColor',
         'fontBackgroundColor',
         'bold',
         'italic',
+        'underline',
+        'strikethrough',
         '|',
         "blockQuote",
         '|', 'alignment:left', 'alignment:center', 'alignment:justify', 'alignment:right',
@@ -97,6 +106,69 @@ EnhancedEditor.defaultConfig = {
         'undo',
         'redo',
     ],
+    
     // Vous pouvez supprimer la ligne suivante si vous n'avez pas besoin de charger des traductions
     translations: [coreTranslations],
+        heading: {
+			options: [
+				{
+					model: 'paragraph',
+					title: 'Paragraph',
+					class: 'ck-heading_paragraph',
+				},
+				{
+					model: 'heading1',
+					view: 'h1',
+					title: 'Heading 1',
+					class: 'ck-heading_heading1',
+				},
+				{
+					model: 'heading2',
+					view: 'h2',
+					title: 'Heading 2',
+					class: 'ck-heading_heading2',
+				},
+				{
+					model: 'heading3',
+					view: 'h3',
+					title: 'Heading 3',
+					class: 'ck-heading_heading3',
+				},
+				{
+					model: 'heading4',
+					view: 'h4',
+					title: 'Heading 4',
+					class: 'ck-heading_heading4',
+				},
+			],
+		},
+    htmlSupport: {
+      allow: [
+          {
+              name: /.*/,
+              attributes: true,
+              classes: true,
+              styles: true
+          }
+      ]
+    },
+    simpleUpload :{
+      uploadUrl: "/api/file/upload"
+
+    },
+    mediaEmbed: {
+      previewsInData:true
+    },
+    link: {
+      decorators: {
+      isExternal: {
+        mode: 'automatic',
+        callback: url => url.startsWith( 'http' ),
+        attributes: {
+          target: '_blank',
+          rel: 'noopener noreferrer'
+        }
+      }
+		}
+  }
 };

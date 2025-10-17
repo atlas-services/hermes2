@@ -34,24 +34,24 @@ class ConventionedDirectoryNamer implements DirectoryNamerInterface
         $notification = 'Upload image';
         try {
             $className = (new \ReflectionClass($object))->getShortName();
-            if ('Sheet' == $className) {
+            if ('Menu' == $className) {
                 if (in_array('getCode', get_class_methods($object))) {
                     $path = $object->getCode() . '/';
                     return $path;
                 }
             }
-            if (in_array('getSheet', get_class_methods($object))) {
+            if (in_array('getMenu', get_class_methods($object))) {
                 if ('Menu' == $className) {
-                    $path = $object->getSheet()->getCode() . '/' . $object->getCode() . '/' ;
+                    $path = $object->getMenu()->getCode() . '/' . $object->getCode() . '/' ;
                 }else{
-                    $path = $object->getSheet()->getCode() . '/' . $className . '/';
+                    $path = $object->getMenu()->getCode() . '/' . $className . '/';
                 }
                 return $path;
             }
             if($object instanceof Post){
                 $path = 'menu';
                 if(!is_null($object->getMenu())){
-                    $menu_code = $object->getMenu()->getMenu()->getCode();
+                    $menu_code = $object->getMenu()->getCode();
                     $menu_id = $object->getMenu()->getId();
                     if('' == $menu_id){
     //                    dd($object);
