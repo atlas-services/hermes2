@@ -66,7 +66,8 @@ class PostType extends AbstractNameBaseType
                     'label' => 'form.label.template_width',
                 ])
             ->add('content', CKEditor5Type::class, [
-                'label' => 'form.label.content'
+                'required' => false,
+                'label' => 'form.label.content',
             ])
         ;
     }

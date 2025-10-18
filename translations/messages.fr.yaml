@@ -17,6 +17,11 @@ form:
     parent: Parent
     parent_menu: -- Menu Parent --
     post_template: Type de présentation
+    list_posts: Liste des Posts
+    edit_post: Mise à jour du Post
+    new_post: Création d'un Post
+    show_post: Affichage d'un Post
+    content: Contenu
     template_width: Largeur du template (de 1 to 12)
 
 
