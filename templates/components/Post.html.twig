@@ -9,7 +9,7 @@
     </thead>
     <tbody data-controller="move-item" data-type="post" data-locale="{{ app.request.locale }}" >
     {% for post in posts %}
-        <tr class="list-items" data-move-item-target="item" data-item-id="{{ post.id }}"  >
+        <tr class="list-items align-middle" data-move-item-target="item" data-item-id="{{ post.id }}"  >
             <td class="col-3">
                 <div class="form-check form-switch form-switch-sm my-0">
                     <input data-controller="active-item"  type="checkbox" class="form-check-input bg-success" data-action="click->active-item#switch" {{ post.active  ? "checked" : "" }}>

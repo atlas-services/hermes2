@@ -59,17 +59,15 @@ class PostType extends AbstractNameBaseType
             ->add('name', null, [
                 'label' => 'form.label.name'
             ])
-            ->add('content', CKEditor5Type::class, [
-                'label' => 'form.label.content'
-            ])
-
-
             ->add('templateWidth', ChoiceType::class, [
                     'choices' => $options['template_width'],
                     'required' => true,
                     'attr' => ['class' => 'custom-select custom-select-lg mb-3 '],
                     'label' => 'form.label.template_width',
                 ])
+            ->add('content', CKEditor5Type::class, [
+                'label' => 'form.label.content'
+            ])
         ;
     }
 

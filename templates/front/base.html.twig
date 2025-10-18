@@ -19,9 +19,10 @@
                     {% include 'front/navbar/' ~ nav_bar ~'.html.twig' %}
                 {% endif %}
             {% endblock nav %}
-
-            {% block content %}
-            {% endblock content %}
+            <div class="col-sm-{{ container_width ?? '12'}} mx-{{ container_mx ?? 'auto' }} my-0 py-0 ">
+                {% block content %}
+                {% endblock content %}
+            </div>
 
         {% endblock %}
     </body>
