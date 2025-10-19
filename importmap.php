@@ -579,4 +579,8 @@ return [
     'ckeditor5/translations/fr.js' => [
         'version' => '47.1.0',
     ],
+    '@fortawesome/fontawesome-free/css/all.css' => [
+        'version' => '7.1.0',
+        'type' => 'css',
+    ],
 ];

@@ -11,4 +11,5 @@ import 'flowbite';
 import './styles/app.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'flowbite/dist/flowbite.min.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

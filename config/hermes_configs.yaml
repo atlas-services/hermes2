@@ -257,6 +257,10 @@ parameters:
         summary: "Largeur menu offcanvas (en %)"
         value: 15
         position: 3
+      nav_margin_top:
+        summary: Marge au dessus du menu (entre 0 et 5)
+        value: 0
+        position: 24
       nav_height:
         summary: Hauteur du sous menu (en px)
         value: '90px'
@@ -336,7 +340,7 @@ parameters:
       nav_sub_menu_mx:
         summary: "Marge entre Menu et sous menu (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
         value: 3
-        position: 21       
+        position: 21
       nav_sub_menu_text_size:
         summary: "Taille texte du sous menu"
         value: h6
