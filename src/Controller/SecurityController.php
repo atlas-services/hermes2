@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route(path: '/change_locale/{locale}', name: 'change_locale')]
+    #[Route(path: '/admin/change_locale/{locale}', name: 'change_locale')]
     public function changeLocale($locale, Request $request, RouterInterface $router)
     {
         // On stocke la langue dans la session

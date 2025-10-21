@@ -209,8 +209,8 @@ class ConfigType extends AbstractType
                     $choice = true;
                     $options = self::MARGES;
                     break;
-                // nav_sub_menu_mx
-                case 'nav_sub_menu_mx':
+                // nav_sub_menu_mt
+                case 'nav_sub_menu_mt':
                     $choice = true;
                     $options = self::MARGES;
                     break;  

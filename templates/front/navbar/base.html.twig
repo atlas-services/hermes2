@@ -1,7 +1,7 @@
 <nav class="mt-{{ nav_margin_top ?? '0' }}" style="background-color:{{ nav_bgcolor ?? 'transparent' }}; height:{{ nav_height }}; font-family: {{ nav_font_family ?? 'Arial' }} " >
     <div class="mx-auto p-0">
         <div class="mx-0 hidden md:block md:w-auto" id="navbar-multi-level">
-            <ul style="background-color:{{ nav_bgcolor ?? 'transparent' }}; " class="offset-sm-{{ nav_offset ?? 0 }} px-0 flex flex-col md:flex-row ">
+            <ul style="background-color:{{ nav_bgcolor ?? 'transparent' }}; " class="offset-sm-{{ nav_offset ?? 0 }} pt-{{ nav_menu_pt ?? 2 }} px-0 flex flex-col md:flex-row ">
                 {% for menu in menus %}
                     {% if (app.request.attributes.get('menu') == menu.slug ) %}
                         {% set link_color = nav_color_active %}
@@ -18,7 +18,7 @@
                         </button>
                         <!-- Dropdown menu -->
                         <div id="dropdownNavbarSub{{menu.id}}" class="z-10 hidden ">
-                            <ul class="px-0 mt-{{ nav_sub_menu_mx ?? 2 }} " aria-labelledby="dropdownLargeButton">
+                            <ul class="px-0 mt-{{ nav_sub_menu_mt ?? 2 }} " aria-labelledby="dropdownLargeButton">
                                 {% for submenu in menu.ownchildren|sort((a, b) => a.position <=> b.position) %}
                                     {% if (app.request.attributes.get('menu') == menu.slug ) and (app.request.attributes.get('submenu') == submenu.slug ) %}
                                         {% set link_color = nav_color_active %}
