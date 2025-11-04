@@ -1,0 +1,30 @@
+<!-- Site footer -->
+<div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+    <section id="section_bottom" ></section>
+</div>
+
+<footer class="footer pt-3 col-lg-{{ footer_container_width|col_lg() }} col-12 mx-auto px-0"
+        style="background-color: {{ footer_bgcolor ?? 'transparent' }}; color: {{ footer_color ?? '#ffffff' }}">
+    <div class="container">
+        {% if footer_about is defined %}
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <p class="text-justify h5">{{ footer_about ?? '' }}</p>
+                </div>
+            </div>
+            <hr>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12 mx-auto text-center">
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#sitemapModal" 
+                onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}">
+                    <p>Sitemap</p>
+                </button>
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#creditModal" 
+                onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}">
+                    <p>credits</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -2,6 +2,7 @@ import './bootstrap.js';
 
 import 'bootstrap';
 import 'flowbite';
+import './js/hermes.js';
 /*
  * Welcome to your app's main JavaScript file!
  *

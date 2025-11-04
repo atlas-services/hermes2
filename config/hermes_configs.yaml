@@ -257,10 +257,6 @@ parameters:
         summary: "Largeur menu offcanvas (en %)"
         value: 15
         position: 3
-      nav_margin_top:
-        summary: Marge au dessus du menu (entre 0 et 5)
-        value: 0
-        position: 24
       nav_height:
         summary: Hauteur du sous menu (en px)
         value: '90px'
@@ -333,22 +329,30 @@ parameters:
         summary: "Espacement gauche du menu"
         value: 0
         position: 19
-      nav_menu_text_size:
+      nav_menu_text_size  :
         summary: "Taille texte du menu"
         value: h5
         position: 20
-      nav_sub_menu_mt:
+      nav_sub_menu_mx:
         summary: "Marge entre Menu et sous menu (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
         value: 3
-        position: 21
-      nav_menu_pt:
-        summary: "Marge entre Menu et top (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
-        value: 3
-        position: 23
+        position: 21       
       nav_sub_menu_text_size:
         summary: "Taille texte du sous menu"
         value: h6
         position: 22
+      nav_data_aos_active:
+        summary: "Activation Effet data aos"
+        value: false
+        position: 23
+      nav_data_aos:
+        summary: "Effet data aos"
+        value: flip-left
+        position: 24
+      nav_data_aos_duration:
+        summary: "Durée Effet data aos"
+        value: 1000
+        position: 25
     content:
       content_bgcolor:
         summary: Couleur de fond du contenu

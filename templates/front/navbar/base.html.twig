@@ -5,17 +5,43 @@
                 {% for menu in menus %}
                     {% if (app.request.attributes.get('menu') == menu.slug ) %}
                         {% set link_color = nav_color_active %}
+                        {% set data_aos = nav_data_aos %}
                     {% else %}
                         {% set link_color = nav_link_color %}
+                        {% set data_aos = '' %}
                     {% endif %}
                     {% if menu.children|length == 1  %}
-                     <li style="color: {{ link_color ?? '#FFF' }}; {{ nav_menu_text_size ?? 'h6' }}" class="py-{{ nav_link_py ?? 1 }} me-{{ nav_espacement ?? 3 }}">
+                    <div>
+                     <li style="color: {{ link_color ?? '#FFF' }}; {{ nav_menu_text_size ?? 'h6' }}" class="py-{{ nav_link_py ?? 0 }} me-{{ nav_espacement ?? 3 }}">
                        <a style="color:{{ link_color }} ; {{ nav_menu_text_size ?? 'h6' }}" href="{{ path('menu-submenu', {'_locale': app.request.locale, 'menu': menu.slug, 'submenu': menu.slug  }) }}" class="text-decoration-none block {{ nav_menu_text_size ?? 'h6' }}  " aria-current="page">{{ menu.name }}</a>
                     </li>
+                        {% if nav_data_aos_active is defined and nav_data_aos_active == 1 %}
+                            {% if data_aos == nav_data_aos %}
+                                <hr class="d-none d-sm-block me-{{ nav_espacement ?? 3 }}" style="color: {{ link_color ?? '#FFF' }}" data-aos="{{ data_aos ?? ''}}" data-aos-duration="{{ data_aos_duration ?? '' }}" />
+                            {% else %}
+                                <hr class="d-none d-sm-block me-{{ nav_espacement ?? 3 }}" style="color: {{ link_color ?? '#FFF' }}" />
+                            {% endif %}
+                        {% endif %}
+                    </div>
                     {% else  %}
-                        <button style="color: {{ link_color ?? '#FFF' }}" class="dropdown-toggle {{ nav_menu_text_size ?? 'h6' }} me-{{ nav_espacement ?? 3 }}" type="button" id="dropdownNavbarLinkSub{{menu.id}}" data-dropdown-toggle="dropdownNavbarSub{{menu.id}}" data-bs-toggle="dropdownNavbarSub{{menu.id}}" aria-expanded="false">
-                            {{ menu.name }}
+                    <div>
+                        <button style="color: {{ link_color ?? '#FFF' }}" id="mega-menu-dropdown-button" id="dropdownNavbarLinkSub{{menu.id}}" data-dropdown-toggle="dropdownNavbarSub{{menu.id}}" data-bs-toggle="dropdownNavbarSub{{menu.id}}"
+                        class=" {{ nav_menu_text_size ?? 'h6' }} py-{{ nav_link_py ?? 0 }} me-{{ nav_espacement ?? 3 }} flex items-center justify-between">
+                        {{ menu.name }}
+                            <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
                         </button>
+                        {% if nav_data_aos_active is defined and nav_data_aos_active == 1 %}
+                            {% if data_aos == nav_data_aos %}
+                                <hr class="d-none d-sm-block me-{{ nav_espacement ?? 3 }}" style="color: {{ link_color ?? '#FFF' }}" data-aos="{{ data_aos ?? ''}}" data-aos-duration="{{ data_aos_duration ?? '' }}" />
+                            {% else %}
+                                <hr class="d-none d-sm-block me-{{ nav_espacement ?? 3 }}" style="color: {{ link_color ?? '#FFF' }}" />
+                            {% endif %}
+                        {% endif %}
+                        </div>
+
+
                         <!-- Dropdown menu -->
                         <div id="dropdownNavbarSub{{menu.id}}" class="z-10 hidden ">
                             <ul class="px-0 mt-{{ nav_sub_menu_mt ?? 2 }} " aria-labelledby="dropdownLargeButton">

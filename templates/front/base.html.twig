@@ -14,6 +14,8 @@
          {% endblock %}
     </head>
     <body {{ stimulus_controller('aos') }}>
+        {% include 'front/sitemap/sitemap.html.twig' %}
+        {% include 'front/credits.html.twig' %}
         {% block body %}
             {% block nav %}
                 <section id="section_top" class="container"></section>
@@ -21,11 +23,13 @@
                     {% include 'front/navbar/' ~ nav_bar ~'.html.twig' %}
                 {% endif %}
             {% endblock nav %}
+            {% include 'front/navbar/_chevrons.html.twig' %}
+
             <div class="col-sm-{{ container_width ?? '12'}} mx-{{ container_mx ?? 'auto' }} my-0 py-0 ">
                 {% block content %}
                 {% endblock content %}
             </div>
-
         {% endblock %}
+        {% include 'front/footer/footer.html.twig' %}
     </body>
 </html>
