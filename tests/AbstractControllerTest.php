@@ -3,27 +3,31 @@
 namespace App\Tests;
 
 use App\Entity\User;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Panther\Client;
+use Symfony\Component\Panther\PantherTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AbstractControllerTest extends WebTestCase
+Abstract class AbstractControllerTest extends PantherTestCase
 {
     const ROLES =['ROLE_ADMIN'];
     const URL_LOGIN = '/fr/login';
+    const SUBMIT_BUTTON = 'Sign in';
     const URL_ADMIN = '/fr/admin/';
     const CLASS_ALERT_DANGER = '.alert-danger';
-    const ALERT_DANGER = 'Identifiants invalides.';
+    const MESSAGE_ALERT_DANGER = 'Identifiants invalides.';
+    const ALERT_DANGER = [
+        'class' => self::CLASS_ALERT_DANGER,
+        'message' => self::MESSAGE_ALERT_DANGER,
+    ];
     const EMAIL = 'email@societe.com';
     const EMAIL_BAD = 'doesNotExist@example.com';
     const PASSWORD = 'password';
     const PASSWORD_BAD = 'bad-password';
 
-    private KernelBrowser $client;
+    protected Client $client;
 
     protected function setUp(): void
     {
-        static::createClient();
         $container = static::getContainer();
         $em = $container->get('doctrine.orm.entity_manager');
         $userRepository = $em->getRepository(User::class);
@@ -46,18 +50,20 @@ class AbstractControllerTest extends WebTestCase
         $em->persist($user);
         $em->flush();
 
+        $this->client = static::createPantherClient();
+
     }
 
     public function login($username = self::EMAIL , $password = self::PASSWORD): void
     {
-        $this->client = static::getClient();
         $this->client->request('GET', self::URL_LOGIN);
-        self::assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('[id="signin"]', 'Please sign in');
 
-        $this->client->submitForm('Sign in', [
+        $this->client->submitForm(self::SUBMIT_BUTTON, [
             '_username' => $username,
             '_password' => $password,
         ]);
+
     }
 
 }
