@@ -12,6 +12,8 @@ form:
     name: Nom
     menus: Menus
     menu: Menu
+    menu_edit : Edit Menu
+    menu_show : Show Menu
     sub_menus: Sous Menus
     sub_menu: Sous Menu
     parent: Parent
@@ -24,6 +26,8 @@ form:
     content: Contenu
     template_width: Largeur du template (de 1 to 12)
 
+admin:
+  title: admin
 
 global:
   login: Login

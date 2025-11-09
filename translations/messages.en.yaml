@@ -12,6 +12,8 @@ form:
     name: Name
     menus: Menus
     menu: Menu
+    menu_edit : Edit Menu
+    menu_show : Show Menu
     sub_menus: Sub Menus
     sub_menu: Sub Menu
     parent: Parent
@@ -23,6 +25,8 @@ form:
     new_post: Création d'un Post
     content: Content
     show_post: Affichage d'un Post
+admin:
+  title: admin
 
 config:
   label: Configuration
