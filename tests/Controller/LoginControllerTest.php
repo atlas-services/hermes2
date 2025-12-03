@@ -3,24 +3,14 @@
 namespace App\Tests\Controller;
 
 use App\Tests\AbstractControllerTest;
-use Facebook\WebDriver\WebDriverBy;
-use Facebook\WebDriver\WebDriverExpectedCondition;
-use Symfony\Bundle\Panther\PantherTestCase;
+use Symfony\Component\Panther\PantherTestCase;
 
 class LoginControllerTest extends AbstractControllerTest
 {
-    protected function tearDown(): void
-    {
-        if ($this->client instanceof \Symfony\Component\Panther\PantherTestCase) {
-            $this->client->quit();
-        }
-        parent::tearDown();
-    }
 
     public function testBadLogin(): void
     {
         try{
-
             $this->login(self::EMAIL_BAD, self::PASSWORD);
             $this->client->waitFor(self::ALERT_DANGER['class']);
             $this->assertSelectorTextContains(self::ALERT_DANGER['class'], self::ALERT_DANGER['message']);

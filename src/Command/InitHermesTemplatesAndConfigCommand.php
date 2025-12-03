@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class InitHermesTemplatesAndConfigCommand extends Command
 {
-    protected static $defaultName = 'app:init-hermes-templates-configs';
+    protected static $defaultName = 'app:init-hermes';
 
     public function __construct(private EntityManagerInterface $entityManager, private ParameterBagInterface $params,)
     {

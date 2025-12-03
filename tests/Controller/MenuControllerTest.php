@@ -15,7 +15,7 @@ final class MenuControllerTest extends AbstractControllerTest
     const MENU_EDIT = 'Edit Menu';
     const BUTTON_CREATE = "Créer";
     const BUTTON_UPDATE = "Mettre à jour";
-    private KernelBrowser $client;
+
     private EntityManagerInterface $manager;
     private EntityRepository $menuRepository;
     private string $path = '/fr/admin/menu/';

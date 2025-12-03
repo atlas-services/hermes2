@@ -79,7 +79,7 @@
             "elfinder:install": "symfony-cmd",
             "importmap:install": "symfony-cmd",
             "app:create-user": "symfony-cmd",
-            "app:init-hermes-templates-configs": "symfony-cmd"
+            "app:init-hermes": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

@@ -38,3 +38,8 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    app:init-hermes:
+        tags: ['console.command']
+        class: App\Command\InitHermesTemplatesAndConfigCommand
+        autowire: true
+        public: true

@@ -3,6 +3,8 @@
 namespace App\Tests;
 
 use App\Entity\User;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Panther\Client;
 use Symfony\Component\Panther\PantherTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -20,8 +22,8 @@ Abstract class AbstractControllerTest extends PantherTestCase
         'message' => self::MESSAGE_ALERT_DANGER,
     ];
     const EMAIL = 'email@societe.com';
-    const EMAIL_BAD = 'doesNotExist@example.com';
     const PASSWORD = 'password';
+    const EMAIL_BAD = 'doesNotExist@example.com';
     const PASSWORD_BAD = 'bad-password';
 
     protected Client $client;
@@ -48,10 +50,44 @@ Abstract class AbstractControllerTest extends PantherTestCase
         $user->setRoles(self::ROLES);
 
         $em->persist($user);
+
         $em->flush();
+
+
+        $this->initConfigAndTemplate();
 
         $this->client = static::createPantherClient();
 
+    }
+
+    public function initConfigAndTemplate()
+    {
+        // Obtenir le conteneur de services
+        $kernel = self::bootKernel();
+        // Trouver la commande via le service
+        $command = $kernel->getContainer()->get('app:init-hermes');
+
+        $commandTester = new CommandTester($command);
+        
+        // Exécuter la commande
+        $commandTester->execute();
+
+        // Vérifiez le résultat de l'exécution
+        $output = $commandTester->getDisplay();
+
+        // // Accéder au conteneur de services
+        // $command = $this->getContainer()->get('app:init-hermes'); // Assurez-vous que le service de votre commande est enregistré
+
+        // // Exécuter la commande
+        // $command->run(); // Remplacez par la méthode d'exécution de votre commande
+    }
+
+    protected function tearDown(): void
+    {
+        if ($this->client instanceof PantherTestCase) {
+            $this->client->quit();
+        }
+        parent::tearDown();
     }
 
     public function login($username = self::EMAIL , $password = self::PASSWORD): void
